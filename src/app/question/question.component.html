@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="card">
+    <div class="d-flex justify-content-between p-3">
+      <div class="image">
+        <img src="https://picsum.photos/200" style="width: 90px" />
+      </div>
+      <div class="quiz-header">
+        <h4>Angular and TypeScript!!!</h4>
+        <span>WELCOME {{ name.toUpperCase() }}</span>
+      </div>
+    </div>
+    <ng-container *ngIf="currentQuestion !== questions.length">
+      <div class="d-flex justify-content-around py-3" style="margin-bottom: 5%">
+        <div class="score">{{ points }} Points</div>
+        <div class="question-remain">
+          Question {{ currentQuestion + 1 }} of {{ questions.length }}
+        </div>
+      </div>
+      <div class="progress" style="margin: 5% 0">
+        <div
+          class="progress-bar progress-bar-striped bg-success"
+          role="progressbar"
+          [ngStyle]="{ width: getProgressPercentage() + '%' }"
+          aria-valuenow="25"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+      <div class="question">
+        <div class="card">
+          <h2>{{ questions[currentQuestion].questionText }}</h2>
+        </div>
+      </div>
+      <div class="options">
+        <ol *ngFor="let option of questions[currentQuestion].options">
+          <li (click)="getAnswer(currentQuestion + 1, option)">
+            <div class="card" appChangeBg [isCorrect]="option.correct">
+              {{ option.text }}
+            </div>
+          </li>
+        </ol>
+      </div>
+      <div class="d-flex justify-content-between">
+        <button
+          class="btn"
+          (click)="decrementQuestion()"
+          [disabled]="currentQuestion === 0"
+        >
+          <i
+            class="fa text-warning fa-chevron-left fa-3x"
+            aria-hidden="true"
+          ></i></button
+        ><button class="btn" (click)="resetQuiz()">
+          <i
+            class="fa text-warning fa-solid fa-repeat fa-3x"
+            aria-hidden="true"
+          ></i></button
+        ><button
+          class="btn"
+          (click)="incrementQuestion()"
+          [disabled]="currentQuestion === questions.length - 1"
+        >
+          <i
+            class="fa text-warning fa-chevron-right fa-3x"
+            aria-hidden="true"
+          ></i>
+        </button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="currentQuestion === questions.length">
+      <div class="row d-flex justify-content-between">
+        <img
+          src="https://t4.ftcdn.net/jpg/01/30/10/31/360_F_130103117_Zrlre6bkCBlHq2cYCRWQniGsjTpPRrDr.jpg"
+          style="width: 200px"
+        />
+        <h4 class="result text-center col-md-6 col-sm-12">
+          Congratulations you have completed your test. Your total Score is
+          {{ points }}
+        </h4>
+      </div>
+    </ng-container>
+  </div>
+</div>

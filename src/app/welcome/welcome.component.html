@@ -1,0 +1,17 @@
+<div class="container bg-light">
+  <h1 class="display-5 fw-bold">WELCOME TO TEST</h1>
+  <p class="col-md-8 fs-4">
+    The test contains total 15 Questions. Each question contains 10 Points
+  </p>
+  <h2 class="display-8">ALL THE BEST</h2>
+  <div class="row" style="margin-bottom: 5%">
+    <div clss="col-4">
+      <label for="">Enter your Name:</label>
+      <input type="text" #name class="form-control" />
+    </div>
+  </div>
+
+  <button class="btn btn-primary" routerLink="/question" (click)="startQuiz()">
+    START
+  </button>
+</div>
